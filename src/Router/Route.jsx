@@ -1,6 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 import Index from "../Components/IndexPage/Index";
 import Phone from "../Components/PhonePage/Phone";
+import Login from "../Components/signIn/Login";
+import Register from "../Components/signIn/Register";
 import MainPage from "../MainPage/MainPage";
 
 
@@ -22,14 +24,14 @@ const route = createBrowserRouter([
                 loader:({params})=>fetch(`http://localhost:5000/phoneCategori/${params.id}`),
                 element: <Phone></Phone>
             },
-            // {
-            //     path: '/login',
-            //     element: <Login></Login>
-            // },
-            // {
-            //     path: '/register',
-            //     element: <Register></Register>
-            // },
+            {
+                path: '/login',
+                element: <Login></Login>
+            },
+            {
+                path: '/register',
+                element: <Register></Register>
+            },
            
         ],
     },

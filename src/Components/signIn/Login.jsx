@@ -1,57 +1,56 @@
-import React, { useContext, useState } from 'react';
-import 'react-toastify/dist/ReactToastify.css';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify';
-import { userContext } from '../context/AuthProvider';
-import useToken from '../../Hooks/Hook';
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+// import { userContext } from '../context/AuthProvider';
+// import useToken from '../../Hooks/Hook';
 
 const Login = () => {
-    const { login } = useContext(userContext);
-    const navigate = useNavigate();
-    const location = useLocation();
-    const from = location.state?.from?.pathname || '/';
+    // const { login } = useContext(userContext);
+    // const navigate = useNavigate();
+    // const location = useLocation();
+    // const from = location.state?.from?.pathname || '/';
 
-    // jwt
-    const [email, setEmail] = useState('');
-    const [token] = useToken(email);
-    if(token) {
-        navigate(from, { replace: true });
-    }
+    // // jwt
+    // const [email, setEmail] = useState('');
+    // const [token] = useToken(email);
+    // if(token) {
+    //     navigate(from, { replace: true });
+    // }
     // end jwt
 
-    const handleLoginForm = (e) => {
-        e.preventDefault();
-        const email = e.target.email.value;
-        const password = e.target.password.value;
-        login(email, password)
-            .then((result) => {
+    // const handleLoginForm = (e) => {
+    //     e.preventDefault();
+    //     const email = e.target.email.value;
+    //     const password = e.target.password.value;
+    //     login(email, password)
+    //         .then((result) => {
 
-                const email = result.user.email;
+    //             const email = result.user.email;
                 
-                // jwt
-                setEmail(email)
-                // const currentUser = { email: email };
-                // console.log(currentUser);
+    //             // jwt
+    //             setEmail(email)
+    //             // const currentUser = { email: email };
+    //             // console.log(currentUser);
 
-                // getting jwt token
-                // fetch('http://localhost:5000/jwt', {
-                //     method: 'POST',
-                //     headers: {
-                //         'content-type': 'application/json',
-                //     },
-                //     body: JSON.stringify(currentUser)
-                // })
-                //     .then(res => res.json())
-                //     .then(result => {
-                //         localStorage.setItem('Doctor', result.token);
-                //         toast("Login success")
-                //         navigate(from, { replace: true });
-                //     })
+    //             // getting jwt token
+    //             // fetch('http://localhost:5000/jwt', {
+    //             //     method: 'POST',
+    //             //     headers: {
+    //             //         'content-type': 'application/json',
+    //             //     },
+    //             //     body: JSON.stringify(currentUser)
+    //             // })
+    //             //     .then(res => res.json())
+    //             //     .then(result => {
+    //             //         localStorage.setItem('Doctor', result.token);
+    //             //         toast("Login success")
+    //             //         navigate(from, { replace: true });
+    //             //     })
 
-            }).catch((error) => {
-                toast("User Not Found");
-            })
-    }
+    //         }).catch((error) => {
+    //             toast("User Not Found");
+    //         })
+    // }
 
 
 
@@ -68,7 +67,7 @@ const Login = () => {
                     <p className="px-3 dark:text-gray-400">OR</p>
                     <hr className="w-full dark:text-gray-400" />
                 </div>
-                <form onSubmit={handleLoginForm} className="space-y-8 ng-untouched ng-pristine ng-valid">
+                <form onSubmit={"handleLoginForm"} className="space-y-8 ng-untouched ng-pristine ng-valid">
                     <div className="space-y-4">
                         <div className="space-y-2">
                             <label className="block text-sm">Email address</label>
@@ -86,7 +85,7 @@ const Login = () => {
                     <button id="button" className="w-full px-8 py-3 font-semibold rounded-md dark:bg-blue-400 dark:text-gray-900">Sign in</button>
                 </form>
             </div>
-            <ToastContainer></ToastContainer>
+            
         </div>
     );
 };

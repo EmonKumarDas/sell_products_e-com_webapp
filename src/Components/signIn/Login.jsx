@@ -1,58 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { userContext } from '../context/AuthProvider';
 
-// import { userContext } from '../context/AuthProvider';
-// import useToken from '../../Hooks/Hook';
 
 const Login = () => {
-    // const { login } = useContext(userContext);
-    // const navigate = useNavigate();
-    // const location = useLocation();
-    // const from = location.state?.from?.pathname || '/';
-
-    // // jwt
-    // const [email, setEmail] = useState('');
-    // const [token] = useToken(email);
-    // if(token) {
-    //     navigate(from, { replace: true });
-    // }
-    // end jwt
-
-    // const handleLoginForm = (e) => {
-    //     e.preventDefault();
-    //     const email = e.target.email.value;
-    //     const password = e.target.password.value;
-    //     login(email, password)
-    //         .then((result) => {
-
-    //             const email = result.user.email;
-                
-    //             // jwt
-    //             setEmail(email)
-    //             // const currentUser = { email: email };
-    //             // console.log(currentUser);
-
-    //             // getting jwt token
-    //             // fetch('http://localhost:5000/jwt', {
-    //             //     method: 'POST',
-    //             //     headers: {
-    //             //         'content-type': 'application/json',
-    //             //     },
-    //             //     body: JSON.stringify(currentUser)
-    //             // })
-    //             //     .then(res => res.json())
-    //             //     .then(result => {
-    //             //         localStorage.setItem('Doctor', result.token);
-    //             //         toast("Login success")
-    //             //         navigate(from, { replace: true });
-    //             //     })
-
-    //         }).catch((error) => {
-    //             toast("User Not Found");
-    //         })
-    // }
-
-
+    const { login } = useContext(userContext);
 
     return (
         <div className='flex justify-center my-10'>

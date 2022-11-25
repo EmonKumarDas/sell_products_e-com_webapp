@@ -4,6 +4,7 @@ import Phone from "../Components/PhonePage/Phone";
 import Login from "../Components/signIn/Login";
 import Register from "../Components/signIn/Register";
 import MainPage from "../MainPage/MainPage";
+import PrivateRoute from "./Private/PrivateRoute";
 
 
 const route = createBrowserRouter([
@@ -22,7 +23,7 @@ const route = createBrowserRouter([
             {
                 path: '/phone/:id',
                 loader:({params})=>fetch(`http://localhost:5000/phoneCategori/${params.id}`),
-                element: <Phone></Phone>
+                element: <PrivateRoute><Phone></Phone></PrivateRoute>
             },
             {
                 path: '/login',

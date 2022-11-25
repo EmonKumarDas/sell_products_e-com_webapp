@@ -2,16 +2,25 @@ import React, { useEffect, useState } from 'react';
 import Categori from './Categori/Categori';
 import image1 from '../../image/iPhone-14-PNG-File.png';
 import DiscountBanner from './DIscountBanner/DiscountBanner';
-
+import { useQuery } from '@tanstack/react-query'
+import Loader from '../Loader/Loader';
 const Index = () => {
 
-    const [categoris, setCategrois] = useState([]);
+    // const [categoris, setCategrois] = useState([]);
 
-    useEffect(() => {
-        fetch("http://localhost:5000/phoneCategori").then(res => res.json()).then(data => {
-            setCategrois(data)
-        })
-    }, [])
+    const { isLoading, data: categoris = [] } = useQuery({
+        queryKey: ['categoris'],
+        queryFn: () =>
+            fetch('http://localhost:5000/phoneCategori').then(res =>
+                res.json()
+            )
+    })
+
+    if (isLoading) {
+        return <Loader></Loader>
+            
+    }
+
 
     return (
         <section className="dark:bg-gray-800 dark:text-gray-100">
@@ -31,9 +40,10 @@ const Index = () => {
                 <p className='font-bold text-3xl text-center border-b-2 p-2'>Second Hand phone Categories</p>
                 <div className='grid lg:grid-cols-3 md:grid-cols-2 gap-5 justify-center justify-items-center'>
                     {
-                        categoris.map(cate => <Categori
-                            cate={cate}
-                        ></Categori>)
+                        categoris.map(cate =>
+                            <Categori
+                                cate={cate}
+                            ></Categori>)
 
                     }
                 </div>

@@ -1,11 +1,14 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { userContext } from '../context/AuthProvider';
 
 
 
 const Register = () => {
     const { googleSignIn, CreateUser, updateUser } = useContext(userContext);
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
+    const navigate = useNavigate();
 
     // google sign in
     const handleGoolgeSignIn = () => {
@@ -28,7 +31,8 @@ const Register = () => {
                 const email = result.user.email;
                 // const currentUser = { email: email };
                 handleUserProfile(name);
-                senduserDatabase(name, email,model_role)
+                senduserDatabase(name, email,model_role);
+                navigate(from, { replace: true });
 
             }).catch((error) => {
                 const errorMessage = error.message;

@@ -1,10 +1,27 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { userContext } from '../context/AuthProvider';
+
 
 
 const Login = () => {
     const { login } = useContext(userContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
+
+    const handleLoginForm = (e) => {
+        e.preventDefault();
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+        login(email, password)
+            .then((result) => {
+                navigate(from, { replace: true });
+            }).catch((error) => {
+                // toast("User Not Found");
+            })
+    }
+
 
     return (
         <div className='flex justify-center my-10'>
@@ -19,7 +36,7 @@ const Login = () => {
                     <p className="px-3 dark:text-gray-400">OR</p>
                     <hr className="w-full dark:text-gray-400" />
                 </div>
-                <form onSubmit={"handleLoginForm"} className="space-y-8 ng-untouched ng-pristine ng-valid">
+                <form onSubmit={handleLoginForm} className="space-y-8 ng-untouched ng-pristine ng-valid">
                     <div className="space-y-4">
                         <div className="space-y-2">
                             <label className="block text-sm">Email address</label>

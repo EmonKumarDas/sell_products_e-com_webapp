@@ -1,6 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 import Allusers from "../Components/DashBoard/Allusers";
 import DashBoard from "../Components/DashBoard/DashBoard";
+import AddProductSeller from "../Components/DashBoard/seller/AddProductSeller";
+import Seller from "../Components/DashBoard/seller/Seller";
 import Index from "../Components/IndexPage/Index";
 import Phone from "../Components/PhonePage/Phone";
 import Login from "../Components/signIn/Login";
@@ -48,14 +50,15 @@ const route = createBrowserRouter([
                 element: <Allusers></Allusers>
             },
 
-            // {
-            //     path: '/dashboard/admin',
-            //     element:<AdminRoute><MakeAdmin></MakeAdmin></AdminRoute>
-            // },
-            // {
-            //     path: '/dashboard/doctors',
-            //     element:<AdminRoute><AddDoctors></AddDoctors></AdminRoute>
-            // },
+            {
+                path: '/dashboard/seller',
+                element:<Seller></Seller>
+            },
+            {
+                path: '/dashboard/seller/input',
+                element:<AddProductSeller></AddProductSeller>
+            },
+
         ]
     }
 

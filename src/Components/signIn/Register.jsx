@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { userContext } from '../context/AuthProvider';
+import CircleLoading from '../Loader/CircleLoading';
 
 
 
 const Register = () => {
-    const { googleSignIn, CreateUser, updateUser } = useContext(userContext);
+    const { googleSignIn, CreateUser, updateUser, loading } = useContext(userContext);
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
     const navigate = useNavigate();
@@ -111,7 +112,7 @@ const Register = () => {
                         </select>
 
                     </div>
-                    <button className="w-full px-8 py-3 font-semibold rounded-md dark:bg-blue-400 dark:text-gray-900">Sign in</button>
+                    <button id="button" className="w-full px-8 py-3 font-semibold rounded-md dark:bg-blue-400 dark:text-gray-900">{loading?<CircleLoading></CircleLoading>:"Register"}</button>
                 </form>
             </div>
 

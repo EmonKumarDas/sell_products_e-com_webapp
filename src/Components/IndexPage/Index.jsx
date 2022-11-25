@@ -4,6 +4,7 @@ import image1 from '../../image/iPhone-14-PNG-File.png';
 import DiscountBanner from './DIscountBanner/DiscountBanner';
 import { useQuery } from '@tanstack/react-query'
 import Loader from '../Loader/Loader';
+
 const Index = () => {
 
     // const [categoris, setCategrois] = useState([]);
@@ -40,8 +41,10 @@ const Index = () => {
                 <p className='font-bold text-3xl text-center border-b-2 p-2'>Second Hand phone Categories</p>
                 <div className='grid lg:grid-cols-3 md:grid-cols-2 gap-5 justify-center justify-items-center'>
                     {
+                       isLoading?<Loader></Loader>:
                         categoris.map(cate =>
                             <Categori
+                            key={cate._id}
                                 cate={cate}
                             ></Categori>)
 

@@ -15,27 +15,27 @@ const Navbar = () => {
         <>
             <li><Link to='/'>Home</Link></li>
             {
-                user ? 
-                <li><Link to='/dashboard'>Dasboard</Link></li>
-                : ""
+                user ?
+                    <li><Link to='/dashboard'>Dasboard</Link></li>
+                    : ""
             }
-            <li><Link to='/appointment'>Appointment</Link></li>
+
             <li><Link to='/review'>Review</Link></li>
             <li><Link>Contact Us</Link></li>
             {
                 user?.email ?
-                <div className='flex gap-2'>
-                    <div className="relative flex-shrink-0">
-                        <span className="absolute bottom-0 right-0 w-4 h-4 dark:bg-green-600 border rounded-full dark:text-gray-100 dark:border-gray-900"></span>
-                        <img src={user?.photoURL} alt="" className="w-12 h-12 border rounded-full dark:bg-gray-500 dark:border-gray-700" />
+                    <div className='flex gap-2'>
+                        <div className="relative flex-shrink-0">
+                            <span className="absolute bottom-0 right-0 w-4 h-4 dark:bg-green-600 border rounded-full dark:text-gray-100 dark:border-gray-900"></span>
+                            <img src={user?.photoURL} alt="" className="w-12 h-12 border rounded-full dark:bg-gray-500 dark:border-gray-700" />
+                        </div>
+                        <li><Link onClick={handleLogout}>LogOut</Link></li>
                     </div>
-                    <li><Link onClick={handleLogout}>LogOut</Link></li>
-                </div>
-                :
-                <div className='flex'>
-                    <li><Link to='/login'>Login</Link></li>
-                    <li><Link to='/register'>Register</Link></li>
-                </div>
+                    :
+                    <div className='flex'>
+                        <li><Link to='/login'>Login</Link></li>
+                        <li><Link to='/register'>Register</Link></li>
+                    </div>
             }
         </>
     return (

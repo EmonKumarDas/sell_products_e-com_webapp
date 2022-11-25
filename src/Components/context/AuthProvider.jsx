@@ -42,7 +42,7 @@ const AuthProvider = ({ children }) => {
         return unsubscribe;
     }, [])
 
-    const authInfo = { googleSignIn, user, loading,CreateUser,login,updateUser, logout };
+    const authInfo = { googleSignIn, user, loading, CreateUser, login, updateUser, logout };
 
     return (
         <userContext.Provider value={authInfo}>{children}</userContext.Provider>

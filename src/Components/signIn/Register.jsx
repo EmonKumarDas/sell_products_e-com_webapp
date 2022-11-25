@@ -5,15 +5,59 @@ import { userContext } from '../context/AuthProvider';
 
 
 const Register = () => {
-    const { googleSignIn } = useContext(userContext);
+    const { googleSignIn, CreateUser, updateUser } = useContext(userContext);
 
     // google sign in
     const handleGoolgeSignIn = () => {
         googleSignIn().then((result) => {
-            const email = result.user.email;
-            const name = result.user.displayName;
-            // console.log(user);
-            const currentUser = { email: email };
+            // const email = result.user.email;
+            // const name = result.user.displayName;
+            // const currentUser = { email: email };
+        })
+    }
+
+    // Register with form
+    const handleLoginForm = (e) => {
+        e.preventDefault();
+        const name = e.target.name.value;
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+        const model_role = e.target.model_role.value;
+        CreateUser(email, password)
+            .then((result) => {
+                const email = result.user.email;
+                // const currentUser = { email: email };
+                handleUserProfile(name);
+                senduserDatabase(name, email,model_role)
+
+            }).catch((error) => {
+                const errorMessage = error.message;
+                console.log(errorMessage);
+            })
+
+        const handleUserProfile = (name) => {
+            const profile = {
+                displayName: name
+            }
+            updateUser(profile).then(() => { })
+        }
+    }
+
+    // send user info to database
+    const senduserDatabase = (name, email,role) => {
+        const user = { name, email,role };
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+
+            },
+            body: JSON.stringify(user),
+        }
+
+        ).then(res => res.json()).then(result => {
+
+            console.log(result)
         })
     }
 
@@ -38,7 +82,7 @@ const Register = () => {
                     <p className="px-3 dark:text-gray-400">OR</p>
                     <hr className="w-full dark:text-gray-400" />
                 </div>
-                <form onSubmit={"handleLoginForm"} className="space-y-8 ng-untouched ng-pristine ng-valid">
+                <form onSubmit={handleLoginForm} className="space-y-8 ng-untouched ng-pristine ng-valid">
                     <div className="space-y-4">
                         <div className="space-y-2">
                             <label className="block text-sm">Name</label>
@@ -51,16 +95,22 @@ const Register = () => {
                         <div className="space-y-2">
                             <div className="flex justify-between">
                                 <label className="text-sm">Password</label>
-                                <a rel="noopener noreferrer" href="#" className="text-xs hover:underline dark:text-gray-400">Forgot password?</a>
+                                <Link rel="noopener noreferrer" href="#" className="text-xs hover:underline dark:text-gray-400">Forgot password?</Link>
                             </div>
                             <input type="password" required name="password" id="password" placeholder="*****" className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-blue-400" />
-                        
+
                         </div>
+                        <p>I want to be a!</p>
+                        <select name='model_role' className="select select-bordered w-full max-w-xs">
+                            <option selected>Buyer</option>
+                            <option>Seller</option>
+                        </select>
+
                     </div>
                     <button className="w-full px-8 py-3 font-semibold rounded-md dark:bg-blue-400 dark:text-gray-900">Sign in</button>
                 </form>
             </div>
-          
+
         </div>
     );
 };

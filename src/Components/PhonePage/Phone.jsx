@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { userContext } from '../context/AuthProvider';
 import Modal from './Modal';
@@ -6,9 +6,12 @@ import Modal from './Modal';
 const Phone = () => {
     const { user } = useContext(userContext);
     const phones = useLoaderData();
-    console.log(phones)
+    const [getPhone,setGetPhone] = useState({})
+    
 
-
+    const handleWishtList = (phone) => {
+        setGetPhone(phone)
+    }
 
     return (
         <div className='grid lg:grid-cols-3 md:grid-cols-2 justify-items-center my-5 gap-5 mx-4'>
@@ -28,9 +31,9 @@ const Phone = () => {
                                 <p className='font-bold'>Location: {phone.location}</p>
                                 <p className='font-bold'>Yerar Of Use: {phone.yearOfUse}</p>
                             </div>
-                            <Modal></Modal>
+                            <Modal getPhone={getPhone} user={user}></Modal>
                             <div className="card-actions justify-end">
-                                <label htmlFor="my-modal-6" className="btn">Book Now</label>
+                                <label onClick={() => handleWishtList(phone)} htmlFor="my-modal-6" className="btn">Book Now</label>
                             </div>
                         </div>
                     </div>)

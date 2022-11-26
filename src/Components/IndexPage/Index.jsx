@@ -12,7 +12,7 @@ const Index = () => {
     const { isLoading, data: categoris = [] } = useQuery({
         queryKey: ['categoris'],
         queryFn: () =>
-            fetch('http://localhost:5000/phoneCategori').then(res =>
+            fetch('http://localhost:5000/brand').then(res =>
                 res.json()
             )
     })

@@ -3,30 +3,34 @@ import { useLoaderData } from 'react-router-dom';
 
 const Phone = () => {
     const phones = useLoaderData();
-    const { _id, name, brand } = phones;
-    console.log("this", phones);
+    const { brand, description, image, location, number, originalPrice, productName, resalePrice, seller, yearOfUse } = phones;
+    console.log(phones);
+
     return (
         <div className='grid lg:grid-cols-3 md:grid-cols-2 justify-items-center my-5 gap-5 mx-4'>
             {
-                brand.map(brands =>
-                    <div className="card w-full bg-base-100 shadow-xl">
-                        <figure><img src={brands.image} className="w-full" alt="Shoes" /></figure>
+                phones.map(phone =>
+                    <div className="card w-full bg-base-100 border">
+                        <figure><img src={phone.image} className="h-[200px]" alt="iphone" /></figure>
                         <div className="card-body">
-                            <h2 className="card-title">{brands.brandname}!</h2>
-                            <p>{brands.description}</p>
-                           <div className='flex'>
-                            <p className='font-bold'>Original Price:- {brands.original_price}</p>
-                           <p className='font-bold'>resale Price:- {brands.resale_price}</p>
-                           </div>
-                           <p className='font-bold'>Years of use {brands.uses}</p>
-                           <p className='font-bold'>Post Time {brands.posted_time}</p>
-                           <p  className='text-warning font-bold'>Seller {brands.seller}</p>
+                            <h2 className="card-title">{phone.productName}!</h2>
+                            <p>{phone.description}</p>
+                            <div className=''>
+                                <p className='font-bold'>Original-Price: ${phone.originalPrice}</p>
+                                <p className='font-bold'>Resale-Price: ${phone.resalePrice}</p>
+                                    <p className='m-1 font-bold text-green-600'><span className='font-bold border p-1 text-red-700'>X</span> Seller: {phone.seller}</p>
+                                <p className='font-bold'>Post-Date: {phone.dateTime}</p>
+                                <p className='font-bold'>Phone: {phone.number}</p>
+                                <p className='font-bold'>Location: {phone.location}</p>
+                                <p className='font-bold'>Yerar Of Use: {phone.yearOfUse}</p>
+                            </div>
                             <div className="card-actions justify-end">
-                                <button className="btn btn-primary">Buy Now</button>
+                                <button className="btn btn-primary">Book Now</button>
                             </div>
                         </div>
                     </div>)
             }
+
         </div>
     );
 };

@@ -17,7 +17,7 @@ const Seller = () => {
                     <thead className="dark:bg-gray-700">
                         <tr className="text-left">
                             <th className="p-3">SL</th>
-                            <th className="p-3">Name</th>
+                            <th className="p-3">Product Name</th>
                             <th className="p-3">Email</th>
                             <th className="p-3">Role</th>
                             <th></th>

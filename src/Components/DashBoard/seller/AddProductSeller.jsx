@@ -15,9 +15,14 @@ const AddProductSeller = () => {
         const o_price = e.target.o_price.value;
         const uses = e.target.uses.value;
         const number = e.target.number.value;
-        const description = e.target.uses.value;
+        const description = e.target.description.value;
         const file = e.target.image.files;
         const image = file[0];
+        var today = new Date();
+        var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+        var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+        var dateTime = date + ' ' + time;
+
         const formData = new FormData();
         formData.append('image', image);
         const url = `https://api.imgbb.com/1/upload?expiration=600&key=${hostimageKey}`;
@@ -27,6 +32,8 @@ const AddProductSeller = () => {
         }).then(res => res.json()).then(data => {
             const SellerData = {
                 seller: user.displayName,
+                email: user.email,
+                dateTime,
                 brand: model_role,
                 productName,
                 location,
@@ -38,9 +45,9 @@ const AddProductSeller = () => {
                 image: data.data.url,
             }
             console.log(SellerData);
-            fetch("http://localhost:5000/phones",{
-                method:'POST',
-                headers:{
+            fetch("http://localhost:5000/phones", {
+                method: 'POST',
+                headers: {
                     'content-type': 'application/json',
                 },
                 body: JSON.stringify(SellerData),
@@ -48,7 +55,8 @@ const AddProductSeller = () => {
                 .then(res => res.json())
                 .then(data => {
                     toast("Data insert successfully")
-                    console.log(data)})
+                    console.log(data)
+                })
 
         })
     }

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { userContext } from '../context/AuthProvider';
+import Modal from './Modal';
 
 const Phone = () => {
     const { user } = useContext(userContext);
@@ -27,8 +28,9 @@ const Phone = () => {
                                 <p className='font-bold'>Location: {phone.location}</p>
                                 <p className='font-bold'>Yerar Of Use: {phone.yearOfUse}</p>
                             </div>
+                            <Modal></Modal>
                             <div className="card-actions justify-end">
-                                <button className="btn btn-primary">Book Now</button>
+                                <label htmlFor="my-modal-6" className="btn">Book Now</label>
                             </div>
                         </div>
                     </div>)

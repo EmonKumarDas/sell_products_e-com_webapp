@@ -18,7 +18,7 @@ const Seller = () => {
                 <div className="overflow-x-auto">
                     <table className="min-w-full text-xs">
                         <colgroup>
-                           
+
                             <col />
                             <col />
                             <col />
@@ -50,11 +50,11 @@ const Seller = () => {
                                     </td>
                                     <td className="p-3">
                                         <div className="avatar">
-                                            <div className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                                            <div className="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                                                 <img alt="/" src={phone.image} />
                                             </div>
                                         </div>
-                                
+
                                     </td>
                                     <td className="p-3">
                                         <p className="dark:text-gray-400">{phone.brand}</p>

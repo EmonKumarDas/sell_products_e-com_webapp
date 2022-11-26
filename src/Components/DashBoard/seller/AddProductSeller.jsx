@@ -1,10 +1,16 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { userContext } from '../../context/AuthProvider';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const AddProductSeller = () => {
     const hostimageKey = process.env.REACT_APP_imgbb_key;
     const { user } = useContext(userContext);
+
+    // const [isApproved, setIsApproved] = useState("");
+    // const buyerUrl = `http://localhost:5000/GetAprroveBuyer?email=${user?.email}`;
+    // fetch(buyerUrl).then(res => res.json()).then(data => {
+    //     console.log(data)
+    //     setIsApproved(data[0]?.role)})
 
     const handleProduct = (e) => {
         e.preventDefault();
@@ -25,6 +31,7 @@ const AddProductSeller = () => {
 
         const formData = new FormData();
         formData.append('image', image);
+    
         const url = `https://api.imgbb.com/1/upload?expiration=600&key=${hostimageKey}`;
         fetch(url, {
             method: 'POST',
@@ -33,6 +40,7 @@ const AddProductSeller = () => {
             const SellerData = {
                 seller: user.displayName,
                 email: user.email,
+                // buyerApprovel: isApproved,
                 dateTime,
                 brand: model_role,
                 productName,

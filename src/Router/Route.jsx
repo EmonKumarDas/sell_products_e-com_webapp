@@ -10,6 +10,7 @@ import Register from "../Components/signIn/Register";
 import DashBoardLayout from "../MainPage/DashBoardLayout";
 import MainPage from "../MainPage/MainPage";
 import PrivateRoute from "./Private/PrivateRoute";
+import SellerRoute from "./Private/SellerRoute";
 
 
 const route = createBrowserRouter([
@@ -52,11 +53,11 @@ const route = createBrowserRouter([
 
             {
                 path: '/dashboard/seller',
-                element:<Seller></Seller>
+                element:<SellerRoute><Seller></Seller></SellerRoute>
             },
             {
                 path: '/dashboard/seller/input',
-                element:<AddProductSeller></AddProductSeller>
+                element:<SellerRoute><AddProductSeller></AddProductSeller></SellerRoute>
             },
 
         ]

@@ -6,7 +6,7 @@ import WishtListCart from './WishtListCart';
 
 const WishList = () => {
     const { user } = useContext(userContext);
-
+const [total,setTotal] = useState("");
     const { isLoading, data: wistlists = [] } = useQuery({
         queryKey: ['wistlists'],
         queryFn: () =>
@@ -30,22 +30,16 @@ const WishList = () => {
                                 key={wistlist._id}
                                 wistlist={wistlist}
                             ></WishtListCart>
-
                         )
                     }
                 </ul>
-                <div className="space-y-1 text-right">
-                    <p>Total amount:
-                        <span className="font-semibold">${""}</span>
-                    </p>
-                    <p className="text-sm dark:text-gray-400">Not including taxes and shipping costs</p>
-                </div>
+        
                 <div className="flex justify-end space-x-4">
                     <button type="button" className="px-6 py-2 border rounded-md dark:border-indigo-400">Back
                         <span className="sr-only sm:not-sr-only">to shop</span>
                     </button>
                     <button type="button" className="px-6 py-2 border rounded-md dark:bg-indigo-400 dark:text-gray-900 dark:border-indigo-400">
-                        <span className="sr-only sm:not-sr-only">Continue to</span>Checkout
+                        <span className="sr-only sm:not-sr-only">Pay Now</span>
                     </button>
                 </div>
             </div>

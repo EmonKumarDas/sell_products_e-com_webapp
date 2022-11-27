@@ -3,24 +3,26 @@ import { useQuery } from '@tanstack/react-query';
 
 const Allusers = () => {
 
-    const {data: users=[],refetch } = useQuery({
+    const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
-        queryFn: async() =>{
-          const res = await fetch('http://localhost:5000/users');
-          const data = await res.json();
-          return data;
-        
-      }});
+        queryFn: async () => {
+            const res = await fetch('http://localhost:5000/users');
+            const data = await res.json();
+            return data;
 
-      const handleAdmin=(id)=>{
-        fetch(`http://localhost:5000/user/seller/${id}`,{
-        method:'PUT',
-        }).then(res=>res.json()).then(result=>{
-          if(result.modifiedCount>0){
-            refetch();
-          }
+        }
+    });
+
+    const handleAdmin = (id) => {
+        fetch(`http://localhost:5000/user/seller/${id}`, {
+            method: 'PUT',
+        }).then(res => res.json()).then(result => {
+            window.location.reload();
+            if (result.modifiedCount > 0) {
+                refetch();
+            }
         })
-      }
+    }
 
     return (
         <div>
@@ -40,7 +42,7 @@ const Allusers = () => {
                                 <th className="p-3">SL</th>
                                 <th className="p-3">Name</th>
                                 <th className="p-3">Email</th>
-                                <th className="p-3">Role</th>
+
                                 <th></th>
                             </tr>
                         </thead>
@@ -59,14 +61,10 @@ const Allusers = () => {
 
                                             <p className="dark:text-gray-400">{user.email}</p>
                                         </td>
-                                        <td className="p-3">
-
-                                            <p className="dark:text-gray-400">{user.role}</p>
-                                        </td>
 
                                         <td className="p-3 text-right">
                                             <span className="px-3 py-1 font-semibold rounded-md dark:bg-indigo-400 dark:text-gray-900">
-                                            <button onClick={() => handleAdmin(user._id)}>{user?.role === "isSeller" ? "Approved" : "Approve Seller"}</button>
+                                                <button onClick={() => handleAdmin(user._id)}>{user?.role === "isSeller" ? "Approved" : "Approve Seller"}</button>
                                             </span>
                                         </td>
                                     </tr>)

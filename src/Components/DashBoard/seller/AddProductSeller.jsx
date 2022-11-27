@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const AddProductSeller = () => {
     const hostimageKey = process.env.REACT_APP_imgbb_key;
     const { user } = useContext(userContext);
-
+    const [isloading, setIsloading] = useState(true);
     // const [isApproved, setIsApproved] = useState("");
     // const buyerUrl = `http://localhost:5000/GetAprroveBuyer?email=${user?.email}`;
     // fetch(buyerUrl).then(res => res.json()).then(data => {
@@ -31,7 +31,7 @@ const AddProductSeller = () => {
 
         const formData = new FormData();
         formData.append('image', image);
-    
+
         const url = `https://api.imgbb.com/1/upload?expiration=600&key=${hostimageKey}`;
         fetch(url, {
             method: 'POST',
@@ -63,6 +63,7 @@ const AddProductSeller = () => {
                 .then(res => res.json())
                 .then(data => {
                     toast("Data insert successfully")
+                    setIsloading(false);
                     console.log(data)
                 })
 
@@ -120,7 +121,7 @@ const AddProductSeller = () => {
                             </div>
                         </div>
                     </fieldset>
-                    <button className="btn btn-outline w-96">Button</button>
+                    <button className="btn btn-outline w-96">Insert</button>
                 </form>
             </section>
             <ToastContainer />

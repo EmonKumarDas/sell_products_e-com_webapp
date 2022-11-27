@@ -1,12 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
 import Allusers from "../Components/DashBoard/Allusers";
-import DashBoard from "../Components/DashBoard/DashBoard";
 import AddProductSeller from "../Components/DashBoard/seller/AddProductSeller";
 import Seller from "../Components/DashBoard/seller/Seller";
 import Index from "../Components/IndexPage/Index";
 import Phone from "../Components/PhonePage/Phone";
 import Login from "../Components/signIn/Login";
 import Register from "../Components/signIn/Register";
+import WishList from "../Components/wishList/WishList";
 import DashBoardLayout from "../MainPage/DashBoardLayout";
 import MainPage from "../MainPage/MainPage";
 import PrivateRoute from "./Private/PrivateRoute";
@@ -28,7 +28,7 @@ const route = createBrowserRouter([
             },
             {
                 path: '/phone/:brand',
-                loader:({params})=>fetch(`http://localhost:5000/phones/${params.brand}`),
+                loader: ({ params }) => fetch(`http://localhost:5000/phones/${params.brand}`),
                 element: <PrivateRoute><Phone></Phone></PrivateRoute>
             },
             {
@@ -39,7 +39,11 @@ const route = createBrowserRouter([
                 path: '/register',
                 element: <Register></Register>
             },
-           
+            {
+                path: '/wistlist',
+                element: <WishList></WishList>
+            },
+
         ],
     },
     {
@@ -53,11 +57,11 @@ const route = createBrowserRouter([
 
             {
                 path: '/dashboard/seller',
-                element:<SellerRoute><Seller></Seller></SellerRoute>
+                element: <SellerRoute><Seller></Seller></SellerRoute>
             },
             {
                 path: '/dashboard/seller/input',
-                element:<SellerRoute><AddProductSeller></AddProductSeller></SellerRoute>
+                element: <SellerRoute><AddProductSeller></AddProductSeller></SellerRoute>
             },
 
         ]

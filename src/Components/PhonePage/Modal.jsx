@@ -41,7 +41,8 @@ const Modal = ({ getPhone, user }) => {
         <div>
             <input type="checkbox" id="my-modal-6" className="modal-toggle" />
             <div className="modal modal-bottom sm:modal-middle">
-                <div className="modal-box">
+                <div className="modal-box relative">
+                <label htmlFor="my-modal-6" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                     <section className="p-6 dark:text-gray-50">
                         <form onSubmit={handleModal} className="container flex flex-col mx-auto space-y-12 ng-untouched ng-pristine ng-valid">
                             <fieldset className="grid gap-6 p-6 rounded-md shadow-sm">

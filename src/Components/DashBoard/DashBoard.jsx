@@ -19,8 +19,8 @@ const DashBoard = () => {
                     <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
                     <ul className="menu p-4 w-80 bg-base-100 text-base-content">
                         <li><Link to='/dashboard'>All Users</Link></li>
-                        <li><Link to='/dashboard'>All Sellers</Link></li>
-                        <li><Link to='/dashboard'>All Buyers</Link></li>
+                        <li><Link to='/dashboard/allseller'>All Sellers</Link></li>
+                        <li><Link to='/dashboard/allbuyres'>All Buyres</Link></li>
                         {
                             isSeller ?
                                 <>

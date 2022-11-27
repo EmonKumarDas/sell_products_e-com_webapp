@@ -34,8 +34,7 @@ const Allusers = () => {
                             <col />
                             <col />
                             <col />
-
-                            <col className="w-24" />
+                            <col className="" />
                         </colgroup>
                         <thead className="dark:bg-gray-700">
                             <tr className="text-left">

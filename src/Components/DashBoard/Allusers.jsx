@@ -13,8 +13,18 @@ const Allusers = () => {
         }
     });
 
-    const handleAdmin = (id) => {
+    const handleSeller = (id) => {
         fetch(`http://localhost:5000/user/seller/${id}`, {
+            method: 'PUT',
+        }).then(res => res.json()).then(result => {
+            window.location.reload();
+            if (result.modifiedCount > 0) {
+                refetch();
+            }
+        })
+    }
+    const handleAdmin = (id) => {
+        fetch(`http://localhost:5000/user/admin/${id}`, {
             method: 'PUT',
         }).then(res => res.json()).then(result => {
             window.location.reload();
@@ -41,7 +51,7 @@ const Allusers = () => {
                                 <th className="p-3">SL</th>
                                 <th className="p-3">Name</th>
                                 <th className="p-3">Email</th>
-
+                                <th></th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -63,7 +73,12 @@ const Allusers = () => {
 
                                         <td className="p-3 text-right">
                                             <span className="px-3 py-1 font-semibold rounded-md dark:bg-indigo-400 dark:text-gray-900">
-                                                <button onClick={() => handleAdmin(user._id)}>{user?.role === "isSeller" ? "Approved" : "Approve Seller"}</button>
+                                                <button onClick={() => handleSeller(user._id)}>{user?.role === "isSeller" ? "Approved" : "Approve Seller"}</button>
+                                            </span>
+                                        </td>
+                                        <td className="p-3 text-right">
+                                            <span className="px-3 py-1 font-semibold rounded-md dark:bg-indigo-400 dark:text-gray-900">
+                                                <button onClick={() => handleAdmin(user._id)}>{user?.role === "isAdmin" ? "Approved Admin" : "Make Admin"}</button>
                                             </span>
                                         </td>
                                     </tr>)

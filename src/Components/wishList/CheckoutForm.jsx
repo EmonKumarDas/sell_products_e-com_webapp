@@ -11,6 +11,7 @@ const CheckoutForm = ({ payment }) => {
     const [loading, setLoading] = useState(false);
     const [transition, setTransition] = useState('');
     const [clientSecret, setClientSecret] = useState('');
+    
     useEffect(() => {
         fetch("http://localhost:5000/create-payment-intent", {
             method: "POST",

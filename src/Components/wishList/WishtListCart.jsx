@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const WishtListCart = ({ wistlist }) => {
-    const { image, item_name, price, seller, seller_location, seller_number,_id } = wistlist;
+    const { image, item_name, price, seller, seller_location, seller_number, _id, paid } = wistlist;
 
     return (
 
@@ -45,9 +45,17 @@ const WishtListCart = ({ wistlist }) => {
                     <span className="sr-only sm:not-sr-only">to shop</span>
                 </button>
                 <Link to={`/dashboard/payment/${_id}`}>
-                    <button type="button" className="px-6 py-2 border rounded-md dark:bg-indigo-400 dark:text-gray-900 dark:border-indigo-400">
-                        <span className="sr-only sm:not-sr-only">Pay Now</span>
-                    </button>
+                    {
+                        paid ?
+                            <button disabled type="button" className="px-6 py-2 border rounded-md dark:bg-indigo-400 dark:text-gray-900 dark:border-indigo-400">
+                                <span className="sr-only sm:not-sr-only">Paid</span>
+                            </button>
+                            :
+                            <button type="button" className="px-6 py-2 border rounded-md dark:bg-indigo-400 dark:text-gray-900 dark:border-indigo-400">
+                                <span className="sr-only sm:not-sr-only">Pay Now</span>
+                            </button>
+                    }
+
                 </Link>
             </div>
         </div>

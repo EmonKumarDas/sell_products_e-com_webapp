@@ -6,7 +6,7 @@ import WishtListCart from './WishtListCart';
 
 const WishList = () => {
     const { user } = useContext(userContext);
-    const [total, setTotal] = useState("");
+
     const { isLoading, data: wistlists = [] } = useQuery({
         queryKey: ['wistlists'],
         queryFn: () =>

@@ -6,10 +6,12 @@ import AddProductSeller from "../Components/DashBoard/seller/AddProductSeller";
 import MyOrder from "../Components/DashBoard/seller/MyOrder";
 import Order from "../Components/DashBoard/seller/Order";
 import Seller from "../Components/DashBoard/seller/Seller";
+import Error from "../Components/Error/Error";
 import Index from "../Components/IndexPage/Index";
 import Phone from "../Components/PhonePage/Phone";
 import Login from "../Components/signIn/Login";
 import Register from "../Components/signIn/Register";
+import Payment from "../Components/wishList/Payment";
 import WishList from "../Components/wishList/WishList";
 import DashBoardLayout from "../MainPage/DashBoardLayout";
 import MainPage from "../MainPage/MainPage";
@@ -22,6 +24,7 @@ const route = createBrowserRouter([
     {
         path: '/',
         element: <MainPage></MainPage>,
+        errorElement:<Error></Error>,
         children: [
             {
                 path: '/',
@@ -54,6 +57,7 @@ const route = createBrowserRouter([
     {
         path: '/dashboard',
         element: <DashBoardLayout></DashBoardLayout>,
+        errorElement:<Error></Error>,
         children: [
             {
                 path: '/dashboard',
@@ -83,6 +87,11 @@ const route = createBrowserRouter([
             {
                 path: '/dashboard/seller/ordered',
                 element: <SellerRoute><Order></Order></SellerRoute>
+            },
+            {
+                path: '/dashboard/payment/:id',
+                loader:({params})=>fetch(`http://localhost:5000/wistlist/${params.id}`),
+                element: <Payment></Payment>
             },
 
 

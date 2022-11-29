@@ -37,14 +37,7 @@ const WishList = () => {
                     }
                 </ul>
 
-                <div className="flex justify-end space-x-4">
-                    <button type="button" className="px-6 py-2 border rounded-md dark:border-indigo-400">Back
-                        <span className="sr-only sm:not-sr-only">to shop</span>
-                    </button>
-                    <button type="button" className="px-6 py-2 border rounded-md dark:bg-indigo-400 dark:text-gray-900 dark:border-indigo-400">
-                        <span className="sr-only sm:not-sr-only">Pay Now</span>
-                    </button>
-                </div>
+              
             </div>
         </div>
     );

@@ -1,14 +1,23 @@
-import React, { useContext } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import React, { useContext } from 'react';
+
 import { userContext } from '../../context/AuthProvider';
 const Seller = () => {
     const { user } = useContext(userContext);
-    const { isLoading, data: phones = [] } = useQuery({
-        queryKey: ['Phones'],
-        queryFn: () =>
-            fetch(`http://localhost:5000/getphones?email=${user.email}`).then(res =>
-                res.json()
-            )
+
+    const url = `http://localhost:5000/getphones?email=${user?.email}`;
+
+    const { data: phones = [] } = useQuery({
+        queryKey: ['phones', user?.email],
+        queryFn: async () => {
+            const res = await fetch(url, {
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
+                }
+            });
+            const data = await res.json();
+            return data;
+        }
     })
 
     return (

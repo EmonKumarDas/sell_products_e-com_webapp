@@ -6,7 +6,7 @@ import WishtListCart from './WishtListCart';
 
 const WishList = () => {
     const { user } = useContext(userContext);
-const [total,setTotal] = useState("");
+    const [total, setTotal] = useState("");
     const { isLoading, data: wistlists = [] } = useQuery({
         queryKey: ['wistlists'],
         queryFn: () =>
@@ -14,6 +14,8 @@ const [total,setTotal] = useState("");
                 res.json()
             )
     })
+
+    console.log(wistlists.length)
 
     if (isLoading) {
         return <Loader></Loader>
@@ -25,15 +27,16 @@ const [total,setTotal] = useState("");
                 <h2 className="text-xl font-semibold">Your cart</h2>
                 <ul className="flex flex-col divide-y divide-gray-700">
                     {
-                        wistlists.map(wistlist =>
-                            <WishtListCart
-                                key={wistlist._id}
-                                wistlist={wistlist}
-                            ></WishtListCart>
-                        )
+                       wistlists.length===0?<p className='font-bold text-red-700'>OHH Nooo! Please Order Somthing</p>: 
+                       wistlists.map(wistlist =>
+                        <WishtListCart
+                            key={wistlist._id}
+                            wistlist={wistlist}
+                        ></WishtListCart>
+                    )
                     }
                 </ul>
-        
+
                 <div className="flex justify-end space-x-4">
                     <button type="button" className="px-6 py-2 border rounded-md dark:border-indigo-400">Back
                         <span className="sr-only sm:not-sr-only">to shop</span>

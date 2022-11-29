@@ -1,16 +1,39 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import Loader from '../Loader/Loader';
 
 const AllBuyer = () => {
     const url = 'http://localhost:5000/seller';
 
-    const { isLoading, error, data: buyers = [] } = useQuery({
+    const { isLoading,refetch, data: buyers = [] } = useQuery({
         queryKey: ['buyers'],
         queryFn: () =>
             fetch(url).then(res =>
                 res.json()
             )
     })
+
+    const handleDelete=(seller)=>{
+    
+        fetch(`http://localhost:5000/seller/${seller._id}`, {
+           method: 'DELETE', 
+           // headers: {
+           //     authorization: `bearer ${localStorage.getItem('accessToken')}`
+           // }
+       })
+       .then(res => res.json())
+       .then(data => {
+           console.log(data);
+           if(data.deletedCount > 0){
+               refetch();
+               // toast.success(`Doctor ${doctor.name} deleted successfully`)
+           }
+       })
+   }
+
+    if(isLoading){
+        return <Loader></Loader>
+    }
 
     return (
         <div className='flex flex-col my-5'>
@@ -34,7 +57,7 @@ const AllBuyer = () => {
                                         <span className="dark:text-gray-400">{buyer.email}</span>
                                     </span>
                                     <span className="flex items-center space-x-2">
-                                       <button className='text-red-700 font-bold text-xl'>X Delete</button>
+                                       <button onClick={()=>handleDelete(buyer)} className='text-red-700 font-bold text-xl'>X Delete</button>
                                         
                                     </span>
                                 </div>

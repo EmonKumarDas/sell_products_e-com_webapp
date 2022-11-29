@@ -1,15 +1,24 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import useToken from '../../Hooks/UseToken';
 import { userContext } from '../context/AuthProvider';
 import CircleLoading from '../Loader/CircleLoading';
 
 
 
 const Login = () => {
-    const { login ,loading} = useContext(userContext);
+    const { login, loading } = useContext(userContext);
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
+
+    // jwt
+    const [email, setEmail] = useState('');
+    const [token] = useToken(email);
+    if (token) {
+        navigate(from, { replace: true });
+    }
+    // end jwt
 
     const handleLoginForm = (e) => {
         e.preventDefault();
@@ -17,7 +26,10 @@ const Login = () => {
         const password = e.target.password.value;
         login(email, password)
             .then((result) => {
-                navigate(from, { replace: true });
+                const email = result.user.email;
+                // jwt
+                setEmail(email)
+
             }).catch((error) => {
                 // toast("User Not Found");
             })
@@ -52,10 +64,10 @@ const Login = () => {
                             <input type="password" required name="password" id="password" placeholder="*****" className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-blue-400" />
                         </div>
                     </div>
-                    <button id="button" className="w-full px-8 py-3 font-semibold rounded-md dark:bg-blue-400 dark:text-gray-900">{loading?<CircleLoading></CircleLoading>:"Sign in"}</button>
+                    <button id="button" className="w-full px-8 py-3 font-semibold rounded-md dark:bg-blue-400 dark:text-gray-900">{loading ? <CircleLoading></CircleLoading> : "Sign in"}</button>
                 </form>
             </div>
-            
+
         </div>
     );
 };

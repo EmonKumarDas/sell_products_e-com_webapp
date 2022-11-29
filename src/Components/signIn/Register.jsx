@@ -1,5 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import useToken from '../../Hooks/UseToken';
 import { userContext } from '../context/AuthProvider';
 import CircleLoading from '../Loader/CircleLoading';
 
@@ -10,6 +11,13 @@ const Register = () => {
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
     const navigate = useNavigate();
+
+    // // jwt
+    const [currentEmail, setEmail] = useState('');
+    const [token] = useToken(currentEmail);
+    if (token) {
+        navigate(from, { replace: true });
+    }
 
     // google sign in
     const handleGoolgeSignIn = () => {
@@ -32,8 +40,7 @@ const Register = () => {
                 const email = result.user.email;
                 // const currentUser = { email: email };
                 handleUserProfile(name);
-                senduserDatabase(name, email,model_role);
-                navigate(from, { replace: true });
+                senduserDatabase(name, email, model_role);
 
             }).catch((error) => {
                 const errorMessage = error.message;
@@ -49,19 +56,20 @@ const Register = () => {
     }
 
     // send user info to database
-    const senduserDatabase = (name, email,role) => {
-        const user = { name, email,role };
+    const senduserDatabase = (name, email, role) => {
+        const user = { name, email, role };
         fetch('http://localhost:5000/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
             },
-            
+
             body: JSON.stringify(user),
         }
 
         ).then(res => res.json()).then(result => {
-
+            //    jwt
+            setEmail(email)
             console.log(result)
         })
     }
@@ -112,7 +120,7 @@ const Register = () => {
                         </select>
 
                     </div>
-                    <button id="button" className="w-full px-8 py-3 font-semibold rounded-md dark:bg-blue-400 dark:text-gray-900">{loading?<CircleLoading></CircleLoading>:"Register"}</button>
+                    <button id="button" className="w-full px-8 py-3 font-semibold rounded-md dark:bg-blue-400 dark:text-gray-900">{loading ? <CircleLoading></CircleLoading> : "Register"}</button>
                 </form>
             </div>
 

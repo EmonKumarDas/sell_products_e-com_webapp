@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { Link, Outlet } from 'react-router-dom';
+import UseAdmin from '../../Hooks/UseAdmin';
 import UseSeller from '../../Hooks/UseSeller';
 import { userContext } from '../context/AuthProvider';
 
@@ -7,6 +8,7 @@ import { userContext } from '../context/AuthProvider';
 const DashBoard = () => {
     const { user } = useContext(userContext);
     const [isSeller] = UseSeller(user?.email);
+    const [isAdmin] = UseAdmin(user?.email);
     return (
         <div>
             <div className="drawer drawer-mobile">
@@ -18,9 +20,16 @@ const DashBoard = () => {
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
                     <ul className="menu p-4 w-80 bg-base-100 text-base-content">
-                        <li><Link to='/dashboard'>All Users</Link></li>
-                        <li><Link to='/dashboard/allseller'>All Sellers</Link></li>
-                        <li><Link to='/dashboard/allbuyres'>All Buyres</Link></li>
+                        <li><Link to='/dashboard'>My Orders</Link></li>
+
+                        {
+                            isAdmin ?
+                                <>
+                                    <li><Link to='/dashboard/allusers'>All Users</Link></li>
+                                    <li><Link to='/dashboard/allseller'>All Sellers</Link></li>
+                                    <li><Link to='/dashboard/allbuyres'>All Buyers</Link></li>
+                                </> : ""
+                        }
                         {
                             isSeller ?
                                 <>

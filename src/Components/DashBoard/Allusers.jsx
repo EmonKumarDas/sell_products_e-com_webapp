@@ -1,9 +1,10 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
+import Loader from '../Loader/Loader';
 
 const Allusers = () => {
 
-    const { data: users = [], refetch } = useQuery({
+    const { isLoading, data: users = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
             const res = await fetch('http://localhost:5000/users');
@@ -13,9 +14,16 @@ const Allusers = () => {
         }
     });
 
+    if (isLoading) {
+        return <Loader></Loader>
+    }
+
     const handleSeller = (id) => {
         fetch(`http://localhost:5000/user/seller/${id}`, {
             method: 'PUT',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
         }).then(res => res.json()).then(result => {
             window.location.reload();
             if (result.modifiedCount > 0) {
@@ -26,6 +34,9 @@ const Allusers = () => {
     const handleAdmin = (id) => {
         fetch(`http://localhost:5000/user/admin/${id}`, {
             method: 'PUT',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
         }).then(res => res.json()).then(result => {
             window.location.reload();
             if (result.modifiedCount > 0) {

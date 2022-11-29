@@ -9,9 +9,14 @@ const Order = () => {
     const { isLoading, data: phones = [] } = useQuery({
         queryKey: ['Phones'],
         queryFn: () =>
-            fetch(`http://localhost:5000/order/${user?.email}`).then(res =>
-                res.json()
-            )
+            fetch(`http://localhost:5000/order/${user?.email}`, {
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
+                }
+            })
+                .then(res =>
+                    res.json()
+                )
     })
     if (isLoading) {
         return <Loader></Loader>

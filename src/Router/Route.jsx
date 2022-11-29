@@ -3,6 +3,7 @@ import AllBuyer from "../Components/DashBoard/AllBuyer";
 import AllSeller from "../Components/DashBoard/AllSeller";
 import Allusers from "../Components/DashBoard/Allusers";
 import AddProductSeller from "../Components/DashBoard/seller/AddProductSeller";
+import MyOrder from "../Components/DashBoard/seller/MyOrder";
 import Order from "../Components/DashBoard/seller/Order";
 import Seller from "../Components/DashBoard/seller/Seller";
 import Index from "../Components/IndexPage/Index";
@@ -12,6 +13,7 @@ import Register from "../Components/signIn/Register";
 import WishList from "../Components/wishList/WishList";
 import DashBoardLayout from "../MainPage/DashBoardLayout";
 import MainPage from "../MainPage/MainPage";
+import AdminRoute from "./Private/AdminRoute";
 import PrivateRoute from "./Private/PrivateRoute";
 import SellerRoute from "./Private/SellerRoute";
 
@@ -55,15 +57,19 @@ const route = createBrowserRouter([
         children: [
             {
                 path: '/dashboard',
-                element: <Allusers></Allusers>
+                element: <MyOrder></MyOrder>
+            },
+            {
+                path: '/dashboard/allusers',
+                element: <AdminRoute><Allusers></Allusers></AdminRoute>
             },
             {
                 path: '/dashboard/allseller',
-                element: <AllSeller></AllSeller>
+                element: <AdminRoute><AllSeller></AllSeller></AdminRoute>
             },
             {
                 path: '/dashboard/allbuyres',
-                element: <AllBuyer></AllBuyer>
+                element: <AdminRoute><AllBuyer></AllBuyer></AdminRoute>
             },
 
             {
@@ -78,7 +84,7 @@ const route = createBrowserRouter([
                 path: '/dashboard/seller/ordered',
                 element: <SellerRoute><Order></Order></SellerRoute>
             },
-           
+
 
         ]
     }

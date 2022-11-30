@@ -25,7 +25,7 @@ const Phone = () => {
                             <div className=''>
                                 <p className='font-bold'>Original-Price: ${phone.originalPrice}</p>
                                 <p className='font-bold'>Resale-Price: ${phone.resalePrice}</p>
-                                {/* <p className='m-1 font-bold text-green-600'> {phone.buyerApprovel === "isSeller" ? <input type="checkbox" checked className="checkbox checkbox-info" /> : <span className='font-bold border p-1 text-red-700'>X</span>} Seller: {phone.seller}</p> */}
+                                <p className='m-1 font-bold text-green-600'> {phone?.buyerApprovel === "isSeller" ? <input type="checkbox" checked className="checkbox checkbox-info" /> : <span className='font-bold border p-1 text-red-700'>X</span>} Seller: {phone?.seller}</p>
                                 <p className='font-bold'>Post-Date: {phone.dateTime}</p>
                                 <p className='font-bold'>Seller: {phone.seller}</p>
                                 <p className='font-bold'>Phone: {phone.number}</p>

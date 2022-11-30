@@ -5,12 +5,15 @@ import 'react-toastify/dist/ReactToastify.css';
 const AddProductSeller = () => {
     const hostimageKey = process.env.REACT_APP_imgbb_key;
     const { user } = useContext(userContext);
-    const [isloading, setIsloading] = useState(true);
-    // const [isApproved, setIsApproved] = useState("");
-    // const buyerUrl = `http://localhost:5000/GetAprroveBuyer?email=${user?.email}`;
-    // fetch(buyerUrl).then(res => res.json()).then(data => {
-    //     console.log(data)
-    //     setIsApproved(data[0]?.role)})
+    const [isloading, setIsloading] = useState(false);
+    const [isApproved, setIsApproved] = useState("");
+    const buyerUrl = `http://localhost:5000/GetAprroveBuyer?email=${user?.email}`;
+    fetch(buyerUrl).then(res => res.json()).then(data => {
+        setIsloading(true);
+        setIsApproved(data[0]?.role);
+       
+
+    })
 
     const handleProduct = (e) => {
         e.preventDefault();
@@ -34,13 +37,15 @@ const AddProductSeller = () => {
 
         const url = `https://api.imgbb.com/1/upload?expiration=600&key=${hostimageKey}`;
         fetch(url, {
+            
             method: 'POST',
             body: formData
         }).then(res => res.json()).then(data => {
+        
             const SellerData = {
                 seller: user.displayName,
                 email: user.email,
-                // buyerApprovel: isApproved,
+                buyerApprovel: isApproved,
                 dateTime,
                 brand: model_role,
                 productName,
@@ -60,7 +65,9 @@ const AddProductSeller = () => {
                 },
                 body: JSON.stringify(SellerData),
             })
-                .then(res => res.json())
+                .then(res => {
+                    setIsloading(true);
+                    res.json()})
                 .then(data => {
                     toast("Data insert successfully")
                     setIsloading(false);
@@ -121,7 +128,11 @@ const AddProductSeller = () => {
                             </div>
                         </div>
                     </fieldset>
-                    <button className="btn btn-outline w-96">Insert</button>
+                    {
+                        isloading?<button className="btn btn-outline w-96">Insert</button>
+                        :<button className="btn btn-outline w-96">Inserting...</button>
+                    }
+
                 </form>
             </section>
             <ToastContainer />

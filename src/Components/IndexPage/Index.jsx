@@ -45,16 +45,17 @@ const Index = () => {
                         <div>
                             <h1 className="text-5xl font-bold">Box Office Phone!</h1>
                             <p className="py-6">
-A smartphone is a cellular telephone with an integrated computer and other features not originally associated with telephones such as an operating system, web browsing, and the ability to run software applications.</p>
+                                A smartphone is a cellular telephone with an integrated computer and other features not originally associated with telephones such as an operating system, web browsing, and the ability to run software applications.</p>
                             <button className="btn btn-primary">Get Started</button>
                         </div>
                     </div>
                 </div>
 
                 {/* Advertise section */}
-        <p className='font-bold text-3xl text-center my-5'>Avertised Products</p>
+                <p className='font-bold text-3xl text-center my-5'>Avertised Products</p>
                 <div className='grid lg:grid-cols-3 md:grid-cols-2 justify-items-center my-5 gap-5 mx-4'>
                     {
+                        Advertise.length===0?<p className='text-3xl font-bold text-red-800'>NO Advertise Item</p>:
                         Advertise.map(ads =>
                             ads?.role === "isAdvertise" ?
                                 <AdverTiseCard

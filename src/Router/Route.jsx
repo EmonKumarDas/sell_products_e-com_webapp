@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import Blog from "../Components/Blog/Blog";
 import AllBuyer from "../Components/DashBoard/AllBuyer";
 import AllSeller from "../Components/DashBoard/AllSeller";
 import Allusers from "../Components/DashBoard/Allusers";
@@ -50,6 +51,10 @@ const route = createBrowserRouter([
             {
                 path: '/wistlist',
                 element: <WishList></WishList>
+            },
+            {
+                path: '/blog',
+                element: <Blog></Blog>
             },
 
         ],

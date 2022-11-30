@@ -15,6 +15,7 @@ const Navbar = () => {
     const menubar =
         <>
             <li><Link to='/'>Home</Link></li>
+            <li><Link to='/blog'>Blog</Link></li>
             {
                 user ?
                     <>
@@ -24,7 +25,7 @@ const Navbar = () => {
                     : ""
             }
 
-            <li><Link to='/review'>Review</Link></li>
+            <li><Link to='/'>Review</Link></li>
             <li><Link>Contact Us</Link></li>
             {
                 user?.email ?

@@ -5,20 +5,19 @@ import DiscountBanner from './DIscountBanner/DiscountBanner';
 import { useQuery } from '@tanstack/react-query'
 import Loader from '../Loader/Loader';
 import AdverTiseCard from '../AdverTise/AdverTiseCard';
-
+import axios from 'axios';
 const Index = () => {
 
     const [Advertise, setAdvertise] = useState([]);
-    // getphones
 
-    useEffect(() => {
-        fetch('http://localhost:5000/adviretise')
-            .then(res => res.json())
-            .then(data => {
-                // console.log(data);
-                setAdvertise(data)
-            })
-    }, [])
+    const getRepo = () => {
+        axios.get('http://localhost:5000/adviretise').then(res => {
+            setAdvertise(res.data)
+            console.log(res.data);
+        })
+    }
+
+    useEffect(() => getRepo(), [])
 
     const { isLoading, data: categoris = [] } = useQuery({
         queryKey: ['categoris'],
@@ -55,14 +54,14 @@ const Index = () => {
                 <p className='font-bold text-3xl text-center my-5'>Avertised Products</p>
                 <div className='grid lg:grid-cols-3 md:grid-cols-2 justify-items-center my-5 gap-5 mx-4'>
                     {
-                        Advertise.length===0?<p className='text-3xl font-bold text-red-800'>NO Advertise Item</p>:
-                        Advertise.map(ads =>
-                            ads?.role === "isAdvertise" ?
-                                <AdverTiseCard
-                                    phone={ads}
-                                ></AdverTiseCard> : ""
+                        Advertise?.length === 0 ? <p className='text-3xl font-bold text-red-800'>NO Advertise Item</p> :
+                            Advertise?.map(ads =>
+                                ads?.role === "isAdvertise" ?
+                                    <AdverTiseCard
+                                        phone={ads}
+                                    ></AdverTiseCard> : ""
 
-                        )
+                            )
                     }
                 </div>
 

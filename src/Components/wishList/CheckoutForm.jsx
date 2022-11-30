@@ -1,8 +1,11 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useEffect, useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const CheckoutForm = ({ payment }) => {
     const stripe = useStripe();
+    const navigate = useNavigate();
     const elements = useElements();
     const { price, buyer_email, buyer_name, _id } = payment;
 
@@ -88,6 +91,8 @@ const CheckoutForm = ({ payment }) => {
                         setSucceeded("Congratulations!! Your Payment was successfully");
                         setTransition(paymentIntent.id)
                         console.log(paymentIntent.id);
+                        navigate('/dashboard');
+                        toast("Payment Success")
                     }
                 })
 
@@ -112,12 +117,13 @@ const CheckoutForm = ({ payment }) => {
                     },
                 }}
             />
-            <button type="submit" className='my-5 bg-slate-500 text-black px-10 rounded font-bold py-2' disabled={!stripe || !clientSecret || loading}>
+            <button type="submit" className='my-5 bg-primary text-black px-10 rounded font-bold py-2' disabled={!stripe || !clientSecret || loading}>
                 Pay
             </button>
             <p className='font-bold text-red-700'>{error}</p>
             <p className='text-white font-bold'>{succeeded}</p>
             <p className='text-white font-bold'>Your Transiton ID is : {transition}</p>
+            <ToastContainer />
         </form>
     );
 };

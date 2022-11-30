@@ -14,8 +14,6 @@ const MyOrder = () => {
             )
     })
 
-    console.log(wistlists[0].paid)
-
     if (isLoading) {
         return <Loader></Loader>
     }
@@ -24,7 +22,7 @@ const MyOrder = () => {
             <p className='font-bold text-xl my-5 text-center'>Order Page</p>
 
             {
-                wistlists[0].paid? wistlists.map(wistlist=>
+                wistlists[0]?.paid? wistlists.map(wistlist=>
                 <OrderCard
                 wistlist={wistlist}
                 ></OrderCard>) :""

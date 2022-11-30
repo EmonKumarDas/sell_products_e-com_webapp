@@ -12,19 +12,21 @@ const Register = () => {
     const from = location.state?.from?.pathname || '/';
     const navigate = useNavigate();
 
-    // // jwt
+    //jwt
     const [currentEmail, setEmail] = useState('');
     const [token] = useToken(currentEmail);
     if (token) {
         navigate(from, { replace: true });
     }
 
+    const defaultRole = 'Buyer';
+
     // google sign in
     const handleGoolgeSignIn = () => {
         googleSignIn().then((result) => {
-            // const email = result.user.email;
-            // const name = result.user.displayName;
-            // const currentUser = { email: email };
+            const email = result.user.email;
+            const name = result.user.displayName;
+            senduserDatabase(name, email, defaultRole)
         })
     }
 

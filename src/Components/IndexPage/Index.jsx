@@ -4,10 +4,21 @@ import image1 from '../../image/iPhone-14-PNG-File.png';
 import DiscountBanner from './DIscountBanner/DiscountBanner';
 import { useQuery } from '@tanstack/react-query'
 import Loader from '../Loader/Loader';
+import AdverTiseCard from '../AdverTise/AdverTiseCard';
 
 const Index = () => {
 
-    // const [categoris, setCategrois] = useState([]);
+    const [Advertise, setAdvertise] = useState([]);
+    // getphones
+
+    useEffect(() => {
+        fetch('http://localhost:5000/adviretise')
+            .then(res => res.json())
+            .then(data => {
+                // console.log(data);
+                setAdvertise(data)
+            })
+    }, [])
 
     const { isLoading, data: categoris = [] } = useQuery({
         queryKey: ['categoris'],
@@ -19,8 +30,9 @@ const Index = () => {
 
     if (isLoading) {
         return <Loader></Loader>
-            
+
     }
+
 
 
     return (
@@ -31,22 +43,38 @@ const Index = () => {
                     <div className="hero-content flex-col lg:flex-row-reverse">
                         <img alt='' src={image1} className="max-w-sm" />
                         <div>
-                            <h1 className="text-5xl font-bold">Box Office News!</h1>
-                            <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+                            <h1 className="text-5xl font-bold">Box Office Phone!</h1>
+                            <p className="py-6">
+A smartphone is a cellular telephone with an integrated computer and other features not originally associated with telephones such as an operating system, web browsing, and the ability to run software applications.</p>
                             <button className="btn btn-primary">Get Started</button>
                         </div>
                     </div>
                 </div>
 
+                {/* Advertise section */}
+        <p className='font-bold text-3xl text-center my-5'>Avertised Products</p>
+                <div className='grid lg:grid-cols-3 md:grid-cols-2 justify-items-center my-5 gap-5 mx-4'>
+                    {
+                        Advertise.map(ads =>
+                            ads?.role === "isAdvertise" ?
+                                <AdverTiseCard
+                                    phone={ads}
+                                ></AdverTiseCard> : ""
+
+                        )
+                    }
+                </div>
+
+
                 <p className='font-bold text-3xl text-center border-b-2 p-2'>Second Hand phone Categories</p>
                 <div className='grid lg:grid-cols-3 md:grid-cols-2 gap-5 justify-center justify-items-center'>
                     {
-                       isLoading?<Loader></Loader>:
-                        categoris.map(cate =>
-                            <Categori
-                            key={cate._id}
-                                cate={cate}
-                            ></Categori>)
+                        isLoading ? <Loader></Loader> :
+                            categoris.map(cate =>
+                                <Categori
+                                    key={cate._id}
+                                    cate={cate}
+                                ></Categori>)
 
                     }
                 </div>

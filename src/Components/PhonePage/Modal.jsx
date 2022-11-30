@@ -27,7 +27,7 @@ const Modal = ({ getPhone, user }) => {
 
         }
 
-        const url = 'http://localhost:5000/wistlist';
+        const url = 'https://second-hand-ecom-serverside.vercel.app/wistlist';
         fetch(url, {
             method: 'POST',
             headers: { 'content-type': 'application/json' },

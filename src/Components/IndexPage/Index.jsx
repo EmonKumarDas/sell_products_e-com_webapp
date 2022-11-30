@@ -6,12 +6,13 @@ import { useQuery } from '@tanstack/react-query'
 import Loader from '../Loader/Loader';
 import AdverTiseCard from '../AdverTise/AdverTiseCard';
 import axios from 'axios';
+import useTitle from '../../Hooks/UseHook';
 const Index = () => {
 
     const [Advertise, setAdvertise] = useState([]);
-
+    useTitle('Home')
     const getRepo = () => {
-        axios.get('http://localhost:5000/adviretise').then(res => {
+        axios.get('https://second-hand-ecom-serverside.vercel.app/adviretise').then(res => {
             setAdvertise(res.data)
             console.log(res.data);
         })
@@ -22,7 +23,7 @@ const Index = () => {
     const { isLoading, data: categoris = [] } = useQuery({
         queryKey: ['categoris'],
         queryFn: () =>
-            fetch('http://localhost:5000/brand').then(res =>
+            fetch('https://second-hand-ecom-serverside.vercel.app/brand').then(res =>
                 res.json()
             )
     })

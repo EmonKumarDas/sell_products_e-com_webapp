@@ -37,7 +37,7 @@ const route = createBrowserRouter([
             },
             {
                 path: '/phone/:brand',
-                loader: ({ params }) => fetch(`http://localhost:5000/phones/${params.brand}`),
+                loader: ({ params }) => fetch(`https://second-hand-ecom-serverside.vercel.app/phones/${params.brand}`),
                 element: <PrivateRoute><Phone></Phone></PrivateRoute>
             },
             {
@@ -95,7 +95,7 @@ const route = createBrowserRouter([
             },
             {
                 path: '/dashboard/payment/:id',
-                loader:({params})=>fetch(`http://localhost:5000/wistlist/${params.id}`),
+                loader:({params})=>fetch(`https://second-hand-ecom-serverside.vercel.app/wistlist/${params.id}`),
                 element: <Payment></Payment>
             },
 

@@ -60,7 +60,7 @@ const Register = () => {
     // send user info to database
     const senduserDatabase = (name, email, role) => {
         const user = { name, email, role };
-        fetch('http://localhost:5000/users', {
+        fetch('https://second-hand-ecom-serverside.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

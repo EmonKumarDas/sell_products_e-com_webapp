@@ -3,7 +3,7 @@ import React from 'react';
 import Loader from '../Loader/Loader';
 
 const AllSeller = () => {
-    const url = 'http://localhost:5000/seller';
+    const url = 'https://second-hand-ecom-serverside.vercel.app/seller';
 
     const { isLoading,refetch, error, data: sellers = [] } = useQuery({
         queryKey: ['sellers'],
@@ -19,7 +19,7 @@ const AllSeller = () => {
 
     const handleDelete=(seller)=>{
     
-     fetch(`http://localhost:5000/seller/${seller._id}`, {
+     fetch(`https://second-hand-ecom-serverside.vercel.app/seller/${seller._id}`, {
         method: 'DELETE', 
         // headers: {
         //     authorization: `bearer ${localStorage.getItem('accessToken')}`

@@ -5,7 +5,7 @@ import { userContext } from '../../context/AuthProvider';
 const Seller = () => {
     const { user } = useContext(userContext);
 
-    const url = `http://localhost:5000/getphones?email=${user?.email}`;
+    const url = `https://second-hand-ecom-serverside.vercel.app/getphones?email=${user?.email}`;
 
     const { data: phones = [],refetch } = useQuery({
         queryKey: ['phones', user?.email],
@@ -21,7 +21,7 @@ const Seller = () => {
     })
 
     const handleDelete = (phone) => {
-        fetch(`http://localhost:5000/getphones/${phone._id}`, {
+        fetch(`https://second-hand-ecom-serverside.vercel.app/getphones/${phone._id}`, {
             method: 'DELETE',
             // headers: {
             //     authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -39,7 +39,7 @@ const Seller = () => {
      }
 
      const handleAdvertise = (id) => {
-        fetch(`http://localhost:5000/getphones/${id}`, {
+        fetch(`https://second-hand-ecom-serverside.vercel.app/getphones/${id}`, {
             method: 'PUT',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`

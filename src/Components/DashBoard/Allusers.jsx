@@ -7,7 +7,7 @@ const Allusers = () => {
     const { isLoading, data: users = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/users');
+            const res = await fetch('https://second-hand-ecom-serverside.vercel.app/users');
             const data = await res.json();
             return data;
 
@@ -19,7 +19,7 @@ const Allusers = () => {
     }
 
     const handleSeller = (id) => {
-        fetch(`http://localhost:5000/user/seller/${id}`, {
+        fetch(`https://second-hand-ecom-serverside.vercel.app/user/seller/${id}`, {
             method: 'PUT',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -32,7 +32,7 @@ const Allusers = () => {
         })
     }
     const handleAdmin = (id) => {
-        fetch(`http://localhost:5000/user/admin/${id}`, {
+        fetch(`https://second-hand-ecom-serverside.vercel.app/user/admin/${id}`, {
             method: 'PUT',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`

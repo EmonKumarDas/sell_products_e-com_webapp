@@ -1,16 +1,18 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
+import useTitle from '../../Hooks/UseHook';
 import { userContext } from '../context/AuthProvider';
 import Loader from '../Loader/Loader';
 import WishtListCart from './WishtListCart';
 
 const WishList = () => {
+    useTitle('WishtList')
     const { user } = useContext(userContext);
 
     const { isLoading, data: wistlists = [] } = useQuery({
         queryKey: ['wistlists'],
         queryFn: () =>
-            fetch(`http://localhost:5000/wistlist?buyer_email=${user.email}`).then(res =>
+            fetch(`https://second-hand-ecom-serverside.vercel.app/wistlist?buyer_email=${user.email}`).then(res =>
                 res.json()
             )
     })

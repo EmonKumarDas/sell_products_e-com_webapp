@@ -9,7 +9,7 @@ const MyOrder = () => {
     const { isLoading, data: wistlists = [] } = useQuery({
         queryKey: ['wistlists'],
         queryFn: () =>
-            fetch(`http://localhost:5000/wistlist?buyer_email=${user.email}`).then(res =>
+            fetch(`https://second-hand-ecom-serverside.vercel.app/wistlist?buyer_email=${user.email}`).then(res =>
                 res.json()
             )
     })

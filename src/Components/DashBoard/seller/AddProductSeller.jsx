@@ -7,7 +7,7 @@ const AddProductSeller = () => {
     const { user } = useContext(userContext);
     const [isloading, setIsloading] = useState(false);
     const [isApproved, setIsApproved] = useState("");
-    const buyerUrl = `http://localhost:5000/GetAprroveBuyer?email=${user?.email}`;
+    const buyerUrl = `https://second-hand-ecom-serverside.vercel.app/GetAprroveBuyer?email=${user?.email}`;
     fetch(buyerUrl).then(res => res.json()).then(data => {
         setIsloading(true);
         setIsApproved(data[0]?.role);
@@ -58,7 +58,7 @@ const AddProductSeller = () => {
                 image: data.data.url,
             }
             console.log(SellerData);
-            fetch("http://localhost:5000/phones", {
+            fetch("https://second-hand-ecom-serverside.vercel.app/phones", {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',

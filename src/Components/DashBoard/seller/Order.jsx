@@ -9,7 +9,7 @@ const Order = () => {
     const { isLoading, data: phones = [] } = useQuery({
         queryKey: ['Phones'],
         queryFn: () =>
-            fetch(`http://localhost:5000/order/${user?.email}`, {
+            fetch(`https://second-hand-ecom-serverside.vercel.app/order/${user?.email}`, {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
                 }

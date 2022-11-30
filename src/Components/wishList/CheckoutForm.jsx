@@ -16,7 +16,7 @@ const CheckoutForm = ({ payment }) => {
     const [clientSecret, setClientSecret] = useState('');
     
     useEffect(() => {
-        fetch("http://localhost:5000/create-payment-intent", {
+        fetch("https://second-hand-ecom-serverside.vercel.app/create-payment-intent", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -76,7 +76,7 @@ const CheckoutForm = ({ payment }) => {
                 email: buyer_email,
                 orderId: _id
             }
-            fetch('http://localhost:5000/payments', {
+            fetch('https://second-hand-ecom-serverside.vercel.app/payments', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',

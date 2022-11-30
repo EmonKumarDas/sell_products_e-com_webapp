@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import UseAdmin from '../../Hooks/UseAdmin';
+import useTitle from '../../Hooks/UseHook';
 import UseSeller from '../../Hooks/UseSeller';
 import { userContext } from '../context/AuthProvider';
 
 
 const DashBoard = () => {
+    useTitle('DashBoard')
     const { user } = useContext(userContext);
     const [isSeller] = UseSeller(user?.email);
     const [isAdmin] = UseAdmin(user?.email);

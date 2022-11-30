@@ -1,5 +1,27 @@
 # Getting Started with Create React App
 
+### `different features and functionality`
+1. Router dom
+2. Private route
+3. Context api
+4. Used browser location
+
+### `environment`
+1. node js
+2. express js
+
+### `Frameworks,`
+1.	React js
+
+### `Libraries `
+1.	Mamba UI
+2.	Daisy UI
+3.	React Tostify
+
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

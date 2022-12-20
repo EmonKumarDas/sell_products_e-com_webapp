@@ -14,8 +14,9 @@ const CheckoutForm = ({ payment }) => {
     const [loading, setLoading] = useState(false);
     const [transition, setTransition] = useState('');
     const [clientSecret, setClientSecret] = useState('');
-    
+
     useEffect(() => {
+        setLoading(true);
         fetch("https://second-hand-ecom-serverside.vercel.app/create-payment-intent", {
             method: "POST",
             headers: {
@@ -27,10 +28,14 @@ const CheckoutForm = ({ payment }) => {
             body: JSON.stringify({ price }),
         })
             .then((res) => res.json())
-            .then((data) => setClientSecret(data.clientSecret));
+            .then((data) => {
+                setClientSecret(data.clientSecret)
+                setLoading(false)
+            });
     }, [price]);
 
     const handleSubmit = async (event) => {
+        setLoading(true)
         event.preventDefault();
         if (!stripe || !elements) {
             return;
@@ -38,17 +43,17 @@ const CheckoutForm = ({ payment }) => {
 
         const card = elements.getElement(CardElement);
 
-        if (card == null) {
+        if (card === null) {
             return;
         }
-        setLoading(true)
-        const { error, paymentMethod } = await stripe.createPaymentMethod({
+        const { error } = await stripe.createPaymentMethod({
             type: 'card',
             card,
         });
 
         if (error) {
             setError(error.message);
+            setLoading(false)
         } else {
             setError('');
         }
@@ -66,6 +71,7 @@ const CheckoutForm = ({ payment }) => {
             });
         if (confirmError) {
             setError(confirmError.message);
+            setLoading(false)
             return;
         }
 
@@ -86,18 +92,17 @@ const CheckoutForm = ({ payment }) => {
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data);
+                    setLoading(false)
+                    navigate('/dashboard');
                     if (data.insertedId) {
                         setSucceeded("Congratulations!! Your Payment was successfully");
-                        setTransition(paymentIntent.id)
-                        console.log(paymentIntent.id);
-                        navigate('/dashboard');
+                        
                         toast("Payment Success")
                     }
                 })
 
         }
-        setLoading(false)
+       
     }
     return (
         <form onSubmit={handleSubmit}>
@@ -118,7 +123,7 @@ const CheckoutForm = ({ payment }) => {
                 }}
             />
             <button type="submit" className='my-5 bg-primary text-black px-10 rounded font-bold py-2' disabled={!stripe || !clientSecret || loading}>
-                Pay
+                {loading?"Loading...":"Pay"}
             </button>
             <p className='font-bold text-red-700'>{error}</p>
             <p className='text-white font-bold'>{succeeded}</p>

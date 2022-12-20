@@ -7,11 +7,12 @@ import CircleLoading from '../Loader/CircleLoading';
 
 
 const Login = () => {
-    const { login, loading } = useContext(userContext);
+    const { login } = useContext(userContext);
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
-
+    const [loading, setLoading] = useState(false);
+    const [error,setError] = useState("")
     // jwt
     const [email, setEmail] = useState('');
     const [token] = useToken(email);
@@ -24,13 +25,17 @@ const Login = () => {
         e.preventDefault();
         const email = e.target.email.value;
         const password = e.target.password.value;
+        setLoading(true);
         login(email, password)
             .then((result) => {
                 const email = result.user.email;
                 // jwt
-                setEmail(email)
 
+                setEmail(email)
+                setLoading(false)
             }).catch((error) => {
+                setError(error.message)
+                setLoading(false);
                 // toast("User Not Found");
             })
     }
@@ -64,6 +69,7 @@ const Login = () => {
                             <input type="password" required name="password" id="password" placeholder="*****" className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-blue-400" />
                         </div>
                     </div>
+                    <p className='text-red-700 font-bold'>{error}</p>
                     <button id="button" className="w-full px-8 py-3 font-semibold rounded-md dark:bg-blue-400 dark:text-gray-900">{loading ? <CircleLoading></CircleLoading> : "Sign in"}</button>
                 </form>
             </div>

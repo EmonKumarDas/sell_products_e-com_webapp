@@ -7,11 +7,12 @@ import CircleLoading from '../Loader/CircleLoading';
 
 
 const Register = () => {
-    const { googleSignIn, CreateUser, updateUser, loading } = useContext(userContext);
+    const { googleSignIn, CreateUser, updateUser } = useContext(userContext);
     const location = useLocation();
+    const [loading,setLoading] = useState(false);
     const from = location.state?.from?.pathname || '/';
     const navigate = useNavigate();
-
+    const [error,setError] = useState("");
     //jwt
     const [currentEmail, setEmail] = useState('');
     const [token] = useToken(currentEmail);
@@ -37,23 +38,26 @@ const Register = () => {
         const email = e.target.email.value;
         const password = e.target.password.value;
         const model_role = e.target.model_role.value;
+        setLoading(true);
         CreateUser(email, password)
             .then((result) => {
                 const email = result.user.email;
-                // const currentUser = { email: email };
                 handleUserProfile(name);
                 senduserDatabase(name, email, model_role);
 
             }).catch((error) => {
                 const errorMessage = error.message;
-                console.log(errorMessage);
+                setError(errorMessage);
+                setLoading(false);
             })
 
         const handleUserProfile = (name) => {
             const profile = {
                 displayName: name
             }
-            updateUser(profile).then(() => { })
+            updateUser(profile).then(() => { 
+                setLoading(false);
+            })
         }
     }
 
@@ -122,6 +126,7 @@ const Register = () => {
                         </select>
 
                     </div>
+                    <p className='text-red-600 font-bold'>{error}</p>
                     <button id="button" className="w-full px-8 py-3 font-semibold rounded-md dark:bg-blue-400 dark:text-gray-900">{loading ? <CircleLoading></CircleLoading> : "Register"}</button>
                 </form>
             </div>

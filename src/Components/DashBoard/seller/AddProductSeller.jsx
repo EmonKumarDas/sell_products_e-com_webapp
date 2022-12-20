@@ -11,7 +11,7 @@ const AddProductSeller = () => {
     fetch(buyerUrl).then(res => res.json()).then(data => {
         setIsloading(true);
         setIsApproved(data[0]?.role);
-       
+
 
     })
 
@@ -37,11 +37,11 @@ const AddProductSeller = () => {
 
         const url = `https://api.imgbb.com/1/upload?expiration=600&key=${hostimageKey}`;
         fetch(url, {
-            
+
             method: 'POST',
             body: formData
         }).then(res => res.json()).then(data => {
-        
+
             const SellerData = {
                 seller: user.displayName,
                 email: user.email,
@@ -67,7 +67,8 @@ const AddProductSeller = () => {
             })
                 .then(res => {
                     setIsloading(true);
-                    res.json()})
+                    res.json()
+                })
                 .then(data => {
                     toast("Data insert successfully")
                     setIsloading(false);
@@ -129,8 +130,8 @@ const AddProductSeller = () => {
                         </div>
                     </fieldset>
                     {
-                        isloading?<button className="btn btn-outline w-96">Insert</button>
-                        :<button className="btn btn-outline w-96">Inserting...</button>
+                        isloading ? <button className="btn btn-outline w-96">Insert</button>
+                            : <button className="btn btn-outline w-96">Inserting...</button>
                     }
 
                 </form>
